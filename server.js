@@ -48,13 +48,13 @@ app.get("/scrape", function(req, res) {
     // Now, we grab every  within an article tag, and do the following:
     $("article").each(function(i, element) {
       
-      var headline = $(element).find("h1").find("a").text();
-      var storyLink = $(element).find("h1").find("a").attr("href");
+      var title = $(element).find("h1").find("a").text();
+      var storyLink = $(element).find("h1").find("a").attr("href").trim();
       var imageLink = $(element).find("span").find("img").attr("src");
-			var summary = $(element).find("p").text();
+			var summary = $(element).find("p").text();  
 			summary = summary.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
 			result.push({ 
-				Headline: headline,
+				Title: title,
         Story: storyLink,
         Image: imageLink,
 				Summary: summary

@@ -3,9 +3,10 @@ $.getJSON("/articles", function (data) {
   // For each one
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<h5 data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</h5>");
+    $("#articles").append("<h5 data-id='" + data[i]._id + "'>" + data[i].Title + "</h5>" + "<a>" + "http://www.elon.edu" + data[i].Story + "</a>" + "<br />" + data[i].Summary + "<br />" + "----------------------------------------------------------------------------------");
   }
 });
+
 
 
 // Whenever someone clicks a p tag
@@ -24,7 +25,7 @@ $(document).on("click", "h5", function () {
     .then(function (data) {
       console.log(data);
       // The comment on the article
-      $("#comments").append("<h5>" + data.title + "</h5>");
+      $("#comments").append("<h5>" + data.Title + "</h5>");
       // An input to enter a new author name
       $("#comments").append("<input id='authorinput' name='author' placeholder='Your Name' >");
       // A textarea to add a new comment body
