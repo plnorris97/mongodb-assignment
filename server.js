@@ -12,7 +12,7 @@ var cheerio = require("cheerio");
 // Require all models
 var db = require("./models");
 
-var PORT = process.env.PORT||3000;
+var PORT = process.env.PORT||3001;
 
 // Initialize Express
 var app = express();
@@ -68,15 +68,16 @@ app.get("/scrape", function(req, res) {
       db.Article.create(result)
         .then(function(dbArticle) {
           // View the added result in the console
-          console.log(dbArticle);
+          //console.log(dbArticle);
         })
         .catch(function(err) {
           // If an error occurred, log it
-          console.log(err);
+          //console.log(err);
         });
     });
 
     // Send a message to the client
+    console.log("Scrape Complete")
     res.send("Scrape Complete");
   });
 });
