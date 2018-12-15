@@ -47,7 +47,7 @@ app.get("/scrape", function(req, res) {
     var $ = cheerio.load(response.data);
 
     // Save an empty result object
-    var result = [];
+    // var result = [];
     
     // Now, we grab every  within an article tag, and do the following:
     $("article").each(function(i, element) {
@@ -57,15 +57,16 @@ app.get("/scrape", function(req, res) {
       var imageLink = $(element).find("span").find("img").attr("src");
 			var summary = $(element).find("p").text();  
 			summary = summary.replace(/(\r\n|\n|\r|\t|\s+)/gm, " ").trim();
-			result.push({ 
+			var result= { 
 				Title: title,
         Story: storyLink,
         Image: imageLink,
 				Summary: summary
-			});
+			};
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
+      // db.Article.findOneAndUpdate(result)
         .then(function(dbArticle) {
           // View the added result in the console
           //console.log(dbArticle);
@@ -77,7 +78,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Send a message to the client
-    console.log("Scrape Complete")
+    console.log("scraped")
     res.send("Scrape Complete");
   });
 });

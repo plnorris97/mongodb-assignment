@@ -1,21 +1,26 @@
+function getArticles() {
 // Grab the articles as a json
 $.getJSON("/articles", function (data) {
   // For each one
   $("#articles").empty();
-  
+
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
     $("#articles").append("<h5 data-id='" + data[i]._id + "'>" + data[i].Title + "</h5>" + "<a>" + "http://www.elon.edu" + data[i].Story + "</a>" + "<br />" + data[i].Summary + "<br />" + "----------------------------------------------------------------------------------");
   
   }
 });
+};
+
+
 
 // click Update News Feed button and perform the scrape.
 $(document).on("click", ".scrapeBtn", function() {
-  $.getJSON("/scrape", function () {
-      console.log("scraped");
-    // var url = "/";
-    // window.location(url);
+  $.ajax({
+    method: "GET",
+    url: "/scrape"
+  }).then(function () {
+    getArticles();
   })
   // if successfully scraped, return to home page ("/")
 
@@ -98,3 +103,5 @@ $(document).on("click", "#savecomment", function () {
   $("#bodyinput").val("");
 
 });
+
+getArticles();
