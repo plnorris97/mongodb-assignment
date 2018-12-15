@@ -6,7 +6,7 @@ $.getJSON("/articles", function (data) {
 
   for (var i = 0; i < data.length; i++) {
     // Display the apropos information on the page
-    $("#articles").append("<h5 data-id='" + data[i]._id + "'>" + data[i].Title + "</h5>" + "<a>" + "http://www.elon.edu" + data[i].Story + "</a>" + "<br />" + data[i].Summary + "<br />" + "----------------------------------------------------------------------------------");
+    $("#articles").append("<h5 data-id='" + "<a>" + data[i]._id + "'>" + data[i].Title + "</h5>" + "http://www.elon.edu" + data[i].Story + "</a>" + "<br />" + data[i].Summary + "<br />" + "----------------------------------------------------------------------------------");
   
   }
 });
@@ -71,9 +71,9 @@ $(document).on("click", "#savecomment", function () {
     url: "/articles/" + thisId,
     data: {
       // Value taken from author input
-      author: $("#authorinput").val(),
+      Author: $("#authorinput").val(),
       // Value taken from comment textarea
-      body: $("#bodyinput").val()
+      Body: $("#bodyinput").val()
     }
   })
     // With that done
@@ -83,11 +83,11 @@ $(document).on("click", "#savecomment", function () {
 
       function addNewComment() {
 
-        var newComment = $("#bodyinput").val(data.comment.body);
+        // var newComment = $("#bodyinput").val(data.Comment.body);
 
-        $("#all-comments").append("<p>Article: " + data.title + "</p>");
-        $("#all-comments").append("<p>Author: " + "something" + "</p>");
-        $("#all-comments").append("<p>Comment: " + newComment + "</p>");
+        $("#all-comments").append("<p>Article: " + data.Title + "</p>");
+        $("#all-comments").append("<p>Author: " + data.Author + "</p>");
+        $("#all-comments").append("<p>Comment: " + data.Comment.body + "</p>");
 
       }
 

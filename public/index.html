@@ -50,14 +50,21 @@
         #headerCol {
           display: block; 
           float: left;
+          /* margin-left: 20px; */
+          padding-left: 100px;
         }
 
+        hr {
+          background-color: white;
+        }
         #logo {
-          width: 100px;
-          height: 100px;
-          text-align: middle; 
+          width: auto;
+          height: 200px;
+          /* text-align: middle;  */
           float: right;
-     
+          padding-right: 100px;
+          padding-bottom: 20px;
+          vertical-align: middle;
         }
 
         #articles {
@@ -121,10 +128,11 @@
     <div class="jumbotron">
         <div class="col-lg-8" id="headerCol">
           <h1 class="display-4">Phoenix News</h1>
-          <h2 class="lead">The latest news from all things Elon!</h2>
+          <hr>
+          <h4>The latest news from all things Elon!</h4>
         </div>
         <div class="col-lg-4" id="logoCol">
-          <img src="../assets/images/elon-signature-primary-centered-maroon-gold-blk-rgb-72dpi.jpg" id="logo">
+          <img src="./logo.jpg" id="logo" alt="logo">
         </div>
     </div>
     <div class="container"> 
