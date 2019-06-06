@@ -137,10 +137,27 @@ app.post("/articles/:id", function(req, res) {
 // Route for getting all Comments from the db
 app.get("/comments", function(req, res) {
   // Grab every document in the Comments collection
-  db.Comment.findByIdAndUpdate(Article, {$push: { Comment: dbComment._id }}, { new: true })
-    .then(function(Comment) {
+  // db.Comment.findByIdAndUpdate(req.params.id, {$pull: { Comment: dbComment._id }}, { new: true })
+  db.Comment.find({})  
+    .then(function(dbComment) {
       // If we were able to successfully find Comments, send them back to the client
-      res.json(Comment);
+      res.json(dbComment);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
+});
+
+// Route for grabbing a specific comment by id, populate it with it's 
+app.get("/comments/:id", function(req, res) {
+  // Using the id passed in the id parameter, prepare a query that finds the matching one in our db...
+  db.Comment.findOne({ _id: req.params.id })
+    // ..and populate all of the comments associated with it
+    .populate("comment")
+    .then(function(dbArticle) {
+      // If we were able to successfully find a comment with the given id, send it back to the client
+      res.json(dbArticle);
     })
     .catch(function(err) {
       // If an error occurred, send it to the client

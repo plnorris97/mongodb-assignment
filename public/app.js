@@ -12,8 +12,6 @@ $.getJSON("/articles", function (data) {
 });
 };
 
-
-
 // click Update News Feed button and perform the scrape.
 $(document).on("click", ".scrapeBtn", function() {
   $.ajax({
@@ -50,13 +48,6 @@ $(document).on("click", "h5", function () {
       // A button to submit a new comment, with the id of the article saved to it
       $("#comments").append("<button data-id='" + data._id + "' id='savecomment'>Save Comment</button>");
 
-      // If there's a comment on the article
-      if (data.Comment) {
-        // Place the author of the comment in the author input
-        $("#authorinput").val(data.Comment.author);
-        // Place the body of the comment in the body textarea
-        $("#bodyinput").val(data.Comment.body);
-      }
     });
 });
 
@@ -85,9 +76,9 @@ $(document).on("click", "#savecomment", function () {
 
         // var newComment = $("#bodyinput").val(data.Comment.body);
 
-        $("#all-comments").append("<p>Article: " + data.Title + "</p>");
-        $("#all-comments").append("<p>Author: " + data.Author + "</p>");
-        $("#all-comments").append("<p>Comment: " + data.Comment.body + "</p>");
+        $("#all-comments").append("<p>Article: " + data.Comment.Title + "</p>");
+        $("#all-comments").append("<p>Author: " + data.Comment[i].Author + "</p>");
+        $("#all-comments").append("<p>Comment: " + data.Comment[i].body + "</p>");
 
       }
 
@@ -99,8 +90,8 @@ $(document).on("click", "#savecomment", function () {
     });
 
   // Also, remove the values entered in the input and textarea for comment entry
-  $("#authorinput").val("");
-  $("#bodyinput").val("");
+  // $("#authorinput").val("");
+  // $("#bodyinput").val("");
 
 });
 
